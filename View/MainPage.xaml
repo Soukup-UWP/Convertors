@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="Convertors.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Convertors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="using:Convertors.ViewModel"
+    xmlns:convertor="using:Convertors.ViewModel.Convertors"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <viewmodel:MainViewModel/>
+    </Page.DataContext>
+    <Page.Resources>
+        <convertor:IntToStringName x:Key="IntNameConverter" />
+        <BitmapImage x:Key="Kamen" UriSource="/Assets/Kamen.png" />
+        <BitmapImage x:Key="Nuzky" UriSource="/Assets/Nuzky.png" />
+        <BitmapImage x:Key="Papir" UriSource="/Assets/Papir.png" />
+        <convertor:IntToPortrait x:Key="IntPortraitConverter" Portrait1="{StaticResource Kamen}" Portrait2="{StaticResource Nuzky}" Portrait3="{StaticResource Papir}"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="74"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Left" Margin="350,107,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding PlayerScore}" VerticalAlignment="Top" FontSize="50"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="350,104,0,0" Grid.Row="1" Text="{Binding ComputerScore}"  TextWrapping="Wrap" VerticalAlignment="Top" FontSize="50"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2">
+            <Button Content="Kámen" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding Play}" CommandParameter="3"/>
+            <Button Content="Nůžky" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding Play}" CommandParameter="1"/>
+            <Button Content="Papír" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding Play}" CommandParameter="2"/>
+        </StackPanel>
+        <Image HorizontalAlignment="Left" Height="300" Width="300" Margin="200,200,0,0" Grid.Row="1" VerticalAlignment="Top" Source="{Binding Player, Converter={StaticResource IntPortraitConverter}}"/>
+        <Image Grid.Column="1" HorizontalAlignment="Left" Height="300" Width="300" Margin="250,200,0,200" Grid.Row="1" VerticalAlignment="Top" Source="{Binding Computer, Converter={StaticResource IntPortraitConverter}}"/>
+
+    </Grid>
+</Page>

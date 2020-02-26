@@ -1,0 +1,1 @@
+C:\Users\josep\OneDrive\Desktop\VisualStudioProjects\UWP\Convertors\Convertors.csproj;x64
